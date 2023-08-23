@@ -1,0 +1,29 @@
+name: SRWorldBorder
+version: '${version}'
+main: com.sakurarealm.bukkit.worldborder.SRWorldBorder
+author: qianxian@sakurarealm.com
+depend:
+  - ProtocolLib
+commands:
+  bordercontrol:
+    aliases: [wbctrl]
+    description: 管理SRWorldBorder插件config
+    usage: |
+      /<command> reload
+      /<command> info
+  borderbypass:
+    aliases: [wbbypass, bypass]
+    description: 管理SRWorldBorder插件的bypass权限
+    usage: /<command> <player> <true|false>
+  tempborderbypass:
+    aliases: [wbtempbypass, tempbypass]
+    description: 管理SRWorldBorder插件的限时bypass权限
+    usage: /<command> <player> <true|false> <time_in_seconds>
+
+permissions:
+  srwb.admin:
+    description: 允许管理SRWorldBorder插件
+    default: op
+  srwb.bypass:
+    description: 允许绕过边界检查
+    default: false

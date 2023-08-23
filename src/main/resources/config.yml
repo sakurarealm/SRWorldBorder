@@ -1,0 +1,14 @@
+render-border-wall: false
+border:
+  world: world
+  center:
+    x: 0
+    y: 64
+    z: 0
+  length: 1000
+  width: 1000
+  servers:
+    north: north_server
+    south: south_server
+    east: east_server
+    west: west_server
