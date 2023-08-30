@@ -114,27 +114,15 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
         return borderCenter;
     }
 
-    public Map<String, String> getServers() {
-        return servers;
-    }
-
-    public BossBarManager getBossBarManager() {
-        return bossBarManager;
-    }
-
     public String getBorderInfo() {
-        StringBuilder info = new StringBuilder();
-        info.append(ChatColor.GOLD).append("边界信息:").append("\n");
-        info.append(ChatColor.GREEN).append("中心: ").append(ChatColor.WHITE).append("X: ").append(borderCenter.getX()).append(", Z: ").append(borderCenter.getZ()).append("\n");
-        info.append(ChatColor.GREEN).append("长度: ").append(ChatColor.WHITE).append(borderLength).append("\n");
-        info.append(ChatColor.GREEN).append("宽度: ").append(ChatColor.WHITE).append(borderWidth).append("\n");
-
-        info.append(ChatColor.GREEN).append("北边服务器: ").append(ChatColor.WHITE).append(servers.get("north")).append("\n");
-        info.append(ChatColor.GREEN).append("南边服务器: ").append(ChatColor.WHITE).append(servers.get("south")).append("\n");
-        info.append(ChatColor.GREEN).append("东边服务器: ").append(ChatColor.WHITE).append(servers.get("east")).append("\n");
-        info.append(ChatColor.GREEN).append("西边服务器: ").append(ChatColor.WHITE).append(servers.get("west")).append("\n");
-
-        return info.toString();
+        return ChatColor.GOLD + "边界信息:" + "\n" +
+                ChatColor.GREEN + "中心: " + ChatColor.WHITE + "X: " + borderCenter.getX() + ", Z: " + borderCenter.getZ() + "\n" +
+                ChatColor.GREEN + "长度: " + ChatColor.WHITE + borderLength + "\n" +
+                ChatColor.GREEN + "宽度: " + ChatColor.WHITE + borderWidth + "\n" +
+                ChatColor.GREEN + "北边服务器: " + ChatColor.WHITE + servers.get("north") + "\n" +
+                ChatColor.GREEN + "南边服务器: " + ChatColor.WHITE + servers.get("south") + "\n" +
+                ChatColor.GREEN + "东边服务器: " + ChatColor.WHITE + servers.get("east") + "\n" +
+                ChatColor.GREEN + "西边服务器: " + ChatColor.WHITE + servers.get("west") + "\n";
     }
 
     private void redirectPlayer(Player player, String server) {
@@ -164,10 +152,10 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
     private void showNorthWall(Player player) {
         int yMin = player.getLocation().getBlockY() - RENDER_WALL_HEIGHT / 2;
         int yMax = yMin + RENDER_WALL_HEIGHT; // 墙的高度
-        double z = borderCenter.getZ() - borderWidth / 2;
+        double z = borderCenter.getZ() - (double) borderWidth / 2;
 
-        double xBorderMax = Math.min(borderCenter.getX() + borderLength / 2, borderCenter.getBlockX() + RENDER_WALL_LENGTH / 2);
-        double xBorderMin = Math.max(borderCenter.getX() - borderLength / 2, borderCenter.getBlockX() - RENDER_WALL_LENGTH);
+        double xBorderMax = Math.min(borderCenter.getX() + (double) borderLength / 2, borderCenter.getBlockX() + RENDER_WALL_LENGTH / 2);
+        double xBorderMin = Math.max(borderCenter.getX() - (double) borderLength / 2, borderCenter.getBlockX() - RENDER_WALL_LENGTH);
 
         for (int y = yMin; y < yMax; y++) {
             for (int x = (int) xBorderMin; x <= xBorderMax; x++) {
@@ -179,10 +167,10 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
     private void showSouthWall(Player player) {
         int yMin = player.getLocation().getBlockY() - RENDER_WALL_HEIGHT / 2;
         int yMax = yMin + RENDER_WALL_HEIGHT;
-        double z = borderCenter.getZ() + borderWidth / 2;
+        double z = borderCenter.getZ() + (double) borderWidth / 2;
 
-        double xBorderMax = Math.min(borderCenter.getX() + borderLength / 2, player.getLocation().getBlockX() + RENDER_WALL_LENGTH / 2);
-        double xBorderMin = Math.max(borderCenter.getX() - borderLength / 2, player.getLocation().getBlockX() - RENDER_WALL_LENGTH / 2);
+        double xBorderMax = Math.min(borderCenter.getX() + (double) borderLength / 2, player.getLocation().getBlockX() + RENDER_WALL_LENGTH / 2);
+        double xBorderMin = Math.max(borderCenter.getX() - (double) borderLength / 2, player.getLocation().getBlockX() - RENDER_WALL_LENGTH / 2);
 
         for (int y = yMin; y < yMax; y++) {
             for (int x = (int) xBorderMin; x <= xBorderMax; x++) {
@@ -194,10 +182,10 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
     private void showEastWall(Player player) {
         int yMin = player.getLocation().getBlockY() - RENDER_WALL_HEIGHT / 2;
         int yMax = yMin + RENDER_WALL_HEIGHT;
-        double x = borderCenter.getX() + borderLength / 2;
+        double x = borderCenter.getX() + (double) borderLength / 2;
 
-        double zBorderMax = Math.min(borderCenter.getZ() + borderWidth / 2, player.getLocation().getBlockZ() + RENDER_WALL_LENGTH / 2);
-        double zBorderMin = Math.max(borderCenter.getZ() - borderWidth / 2, player.getLocation().getBlockZ() - RENDER_WALL_LENGTH / 2);
+        double zBorderMax = Math.min(borderCenter.getZ() + (double) borderWidth / 2, player.getLocation().getBlockZ() + RENDER_WALL_LENGTH / 2);
+        double zBorderMin = Math.max(borderCenter.getZ() - (double) borderWidth / 2, player.getLocation().getBlockZ() - RENDER_WALL_LENGTH / 2);
 
         for (int y = yMin; y < yMax; y++) {
             for (int z = (int) zBorderMin; z <= zBorderMax; z++) {
@@ -234,10 +222,10 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
             UUID playerId = player.getUniqueId();
 
             String direction = null;
-            if (deltaX > borderLength / 2) direction = "east";
-            else if (deltaX < -borderLength / 2) direction = "west";
-            else if (deltaZ > borderWidth / 2) direction = "south";
-            else if (deltaZ < -borderWidth / 2) direction = "north";
+            if (deltaX > (double) borderLength / 2) direction = "east";
+            else if (deltaX < (double) -borderLength / 2) direction = "west";
+            else if (deltaZ > (double) borderWidth / 2) direction = "south";
+            else if (deltaZ < (double) -borderWidth / 2) direction = "north";
             String server = null;
             if (direction != null)
                 server = servers.get(direction);
@@ -302,9 +290,7 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
                     }
 
 
-                    Bukkit.getScheduler().runTaskLater(this, new BukkitRunnable() {
-                        @Override
-                        public void run() {
+                    Bukkit.getScheduler().runTaskLater(this, () -> {
                             // 如果玩家没有跨服成功
                             if (player.isOnline()) {
                                 Location lastValidLocation = lastValidLocations.get(player.getUniqueId());
@@ -312,7 +298,6 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
                                 countdowns.remove(playerId);
                                 bossBarManager.removeBossBar(player);
                             }
-                        }
                     }, 20L);
                 }
             }
@@ -345,10 +330,10 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
         double deltaZ = currentLoc.getZ() - borderCenter.getZ();
 
         // 将玩家放置回边境内
-        if (deltaX > borderLength / 2) inBorderLoc.setX(borderLength / 2 + borderCenter.getX() - radius);
-        else if (deltaX < -borderLength / 2) inBorderLoc.setX(-borderLength / 2 + borderCenter.getX() + radius);
-        if (deltaZ > borderWidth / 2) inBorderLoc.setZ(borderWidth / 2 + borderCenter.getZ() - radius);
-        else if (deltaZ < -borderWidth / 2) inBorderLoc.setZ(-borderWidth / 2 + borderCenter.getZ() + radius);
+        if (deltaX > (double) borderLength / 2) inBorderLoc.setX((double) borderLength / 2 + borderCenter.getX() - radius);
+        else if (deltaX < (double) -borderLength / 2) inBorderLoc.setX((double) -borderLength / 2 + borderCenter.getX() + radius);
+        if (deltaZ > (double) borderWidth / 2) inBorderLoc.setZ((double) borderWidth / 2 + borderCenter.getZ() - radius);
+        else if (deltaZ < (double) -borderWidth / 2) inBorderLoc.setZ((double) -borderWidth / 2 + borderCenter.getZ() + radius);
 
 
         FindNearestAir bfs = new FindNearestAir(inBorderLoc, radius);
