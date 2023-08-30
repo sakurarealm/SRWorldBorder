@@ -1,4 +1,4 @@
-package com.sakurarealm.bukkit.worldborder;
+package com.sakurarealm.bukkit.worldborder.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;

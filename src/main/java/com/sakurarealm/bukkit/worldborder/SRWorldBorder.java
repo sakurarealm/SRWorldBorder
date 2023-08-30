@@ -4,6 +4,8 @@ import com.sakurarealm.bukkit.worldborder.commands.BorderBypassCommand;
 import com.sakurarealm.bukkit.worldborder.commands.BorderControlCommand;
 import com.sakurarealm.bukkit.worldborder.commands.TempBorderBypassCommand;
 import com.sakurarealm.bukkit.worldborder.listener.BorderListener;
+import com.sakurarealm.bukkit.worldborder.utils.BossBarManager;
+import com.sakurarealm.bukkit.worldborder.utils.FindNearestAir;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -11,14 +13,12 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public final class SRWorldBorder extends JavaPlugin implements Listener {
 
@@ -72,6 +72,11 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         bossBarManager.removeAllBossBars();
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        teleportPlayerToValidLocation(event.getPlayer());
     }
 
     @EventHandler
@@ -341,25 +346,13 @@ public final class SRWorldBorder extends JavaPlugin implements Listener {
 
         // 将玩家放置回边境内
         if (deltaX > borderLength / 2) inBorderLoc.setX(borderLength / 2 + borderCenter.getX() - radius);
-        if (deltaX < -borderLength / 2) inBorderLoc.setX(-borderLength / 2 + borderCenter.getX() + radius);
+        else if (deltaX < -borderLength / 2) inBorderLoc.setX(-borderLength / 2 + borderCenter.getX() + radius);
         if (deltaZ > borderWidth / 2) inBorderLoc.setZ(borderWidth / 2 + borderCenter.getZ() - radius);
-        if (deltaZ < -borderWidth / 2) inBorderLoc.setZ(-borderWidth / 2 + borderCenter.getZ() + radius);
+        else if (deltaZ < -borderWidth / 2) inBorderLoc.setZ(-borderWidth / 2 + borderCenter.getZ() + radius);
 
-        return findNearestAir(inBorderLoc, radius);
-    }
 
-    private Location findNearestAir(Location start, int radius) {
-        for (int x = -radius; x <= radius; x++) {
-            for (int y = -radius; y <= radius; y++) {
-                for (int z = -radius; z <= radius; z++) {
-                    Location checkLocation = start.clone().add(x, y, z);
-                    if (checkLocation.getBlock().getType() == Material.AIR) {
-                        return checkLocation;
-                    }
-                }
-            }
-        }
-        return null;
+        FindNearestAir bfs = new FindNearestAir(inBorderLoc, radius);
+        return bfs.find();
     }
 
 }
