@@ -4,6 +4,8 @@ main: com.sakurarealm.bukkit.worldborder.SRWorldBorder
 author: qianxian@sakurarealm.com
 depend:
   - ProtocolLib
+  - LuckPerms
+
 commands:
   bordercontrol:
     aliases: [wbctrl]
@@ -16,9 +18,12 @@ commands:
     description: 管理SRWorldBorder插件的bypass权限
     usage: /<command> <player> <true|false>
   tempborderbypass:
-    aliases: [wbtempbypass, tempbypass]
+    aliases: [wbtempbypass, tempbypass, wbtpbypass]
     description: 管理SRWorldBorder插件的限时bypass权限
-    usage: /<command> <player> <true|false> <time_in_seconds>
+    usage: | 
+      /<command> <player> <time_in_seconds>
+      /<command> <player> true <time_in_seconds> (Deprecated)
+      /<command> <player> false                  (Deprecated)
 
 permissions:
   srwb.admin:

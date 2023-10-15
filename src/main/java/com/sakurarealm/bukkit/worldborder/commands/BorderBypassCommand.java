@@ -1,6 +1,7 @@
 package com.sakurarealm.bukkit.worldborder.commands;
 
 import com.sakurarealm.bukkit.worldborder.SRWorldBorder;
+import com.sakurarealm.bukkit.worldborder.utils.BypassPermissionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -21,7 +22,7 @@ public class BorderBypassCommand implements CommandExecutor {
         }
 
         if (args.length != 2) {
-            sender.sendMessage(ChatColor.DARK_RED + "使用方法：/borderbypass <玩家名> <true|false>");
+            sender.sendMessage(ChatColor.DARK_RED + "使用方法：/" + label + " <玩家名> <true|false>");
             return true;
         }
 
@@ -33,12 +34,14 @@ public class BorderBypassCommand implements CommandExecutor {
 
         boolean enableBypass = args[1].equalsIgnoreCase("true");
 
+        BypassPermissionManager permissionManager = SRWorldBorder.getInstance().getBypassPermissionManager();
         if (enableBypass) {
-            target.addAttachment(SRWorldBorder.getInstance(), "srwb.bypass", true);
+            // 给予bypass权限
+            permissionManager.givePlayerBypassPermission(target, 0);
             sender.sendMessage(target.getName() + " 现在拥有bypass权限。");
         } else {
             // 取消现时的bypass权限
-            target.addAttachment(SRWorldBorder.getInstance(), "srwb.bypass", false);
+            permissionManager.removePlayerBypassPermission(target, false);
             sender.sendMessage(target.getName() + " 的bypass权限已被移除。");
         }
 

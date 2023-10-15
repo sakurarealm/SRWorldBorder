@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.sakurarealm'
-version = '1.0'
+version = '1.1'
 
 repositories {
     mavenCentral()
@@ -24,6 +24,7 @@ repositories {
 dependencies {
     compileOnly "com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT"
     compileOnly name: "spigot-1.12-R0.1-SNAPSHOT"
+    compileOnly group: 'net.luckperms', name: 'api', version: '5.4'
 }
 
 def targetJavaVersion = 8
