@@ -73,7 +73,7 @@ public class TempBorderBypassCommand implements CommandExecutor {
 
         if (success) {
             sender.sendMessage(ChatColor.GREEN + player.getName() +
-                    " 现在拥有限时bypass限时权限，持续 " + timeInSeconds + " 秒。");
+                    " 现在拥有bypass限时权限，持续 " + timeInSeconds + " 秒。");
         } else {
             sender.sendMessage(ChatColor.DARK_RED + "无法为玩家添加bypass限时权限: 玩家 "
                     + player.getName() + " 已经拥有了永久bypass权限");

@@ -70,7 +70,7 @@ public class BypassPermissionManager {
 
         // 为玩家添加限时bypass权限
         Duration duration = Duration.ofSeconds(timeInSeconds);
-        InheritanceNode tempNode = InheritanceNode.builder("srwb.bypass")
+        Node tempNode = Node.builder("srwb.bypass")
                 .expiry(duration)
                 .build();
 
