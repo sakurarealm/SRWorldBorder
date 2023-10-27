@@ -1,14 +1,30 @@
 render-border-wall: false
-border:
-  world: world
-  center:
-    x: 0
-    y: 64
-    z: 0
-  length: 1000
-  width: 1000
-  servers:
-    north: north_server
-    south: south_server
-    east: east_server
-    west: west_server
+borders:
+  world: # world name
+    center: # center of the border
+      x: 0
+      z: 0
+    length: 1000 # length of the border
+    width: 1000 # width of the border
+    servers: # servers on the border
+      north: north_server
+      south: south_server
+      east: east_server
+      west: west_server
+
+# Deprecated version:
+#
+# render-border-wall: false
+# border:
+#  world: world
+#  center:
+#    x: 0
+#    y: 64
+#    z: 0
+#  length: 1000
+#  width: 1000
+#  servers:
+#    north: north_server
+#    south: south_server
+#    east: east_server
+#    west: west_server

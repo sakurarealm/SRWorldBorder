@@ -3,7 +3,6 @@ version: '${version}'
 main: com.sakurarealm.bukkit.worldborder.SRWorldBorder
 author: qianxian@sakurarealm.com
 depend:
-  - ProtocolLib
   - LuckPerms
 
 commands:

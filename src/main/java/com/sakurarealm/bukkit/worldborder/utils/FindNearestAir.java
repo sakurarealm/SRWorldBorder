@@ -19,7 +19,7 @@ public class FindNearestAir {
     private boolean[][][] gray;
 
     public FindNearestAir(Location start, int radius) {
-        this.radius = radius;
+        this.radius = radius % 2 == 0 ? radius + 1 : radius;
         this.start = start.clone();
         this.range = radius * 2 + 1;
     }
@@ -44,7 +44,7 @@ public class FindNearestAir {
                 int z = loc.z + dz[i];
                 Point neighbor = new Point(x, y, z);
                 if (inRange(neighbor) && !isVisited(neighbor)) {
-                    gray[x][y][z] = true;
+                    gray[x + radius][y + radius][z + radius] = true;
                     queue.add(neighbor);
                 }
             }

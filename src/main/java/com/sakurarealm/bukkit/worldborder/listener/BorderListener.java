@@ -1,5 +1,6 @@
 package com.sakurarealm.bukkit.worldborder.listener;
 
+import com.sakurarealm.bukkit.worldborder.BorderConfig;
 import com.sakurarealm.bukkit.worldborder.SRWorldBorder;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,9 +31,11 @@ public class BorderListener implements Listener {
     }
 
     private boolean isLocationOutsideBorder(Location location) {
-        double borderLength = SRWorldBorder.getInstance().getBorderLength();
-        double borderWidth = SRWorldBorder.getInstance().getBorderWidth();
-        Location borderCenter = SRWorldBorder.getInstance().getBorderCenter();
+        String worldName = location.getWorld().getName();
+        BorderConfig borderConfig = SRWorldBorder.getInstance().getBorderConfig();
+        double borderLength = borderConfig.getBorderLength(worldName);
+        double borderWidth = borderConfig.getBorderWidth(worldName);
+        Location borderCenter = borderConfig.getBorderCenter(worldName);
         return Math.abs(location.getX() - borderCenter.getX()) > borderLength / 2 ||
                 Math.abs(location.getZ() - borderCenter.getZ()) > borderWidth / 2;
     }

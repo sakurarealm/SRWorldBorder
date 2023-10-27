@@ -41,8 +41,9 @@ public class BorderControlCommand implements TabExecutor {
         if (plugin == null)
             return;
 
-        plugin.loadConfig();
-        sender.sendMessage(ChatColor.GREEN + "已重载服务器边界配置! 新的配置:\n" + SRWorldBorder.getInstance().getBorderInfo());
+        plugin.loadBorderConfig();
+        sender.sendMessage(ChatColor.GREEN + "已重载服务器边界配置! 新的配置:\n" +
+                SRWorldBorder.getInstance().getBorderConfig().getBorderInfo());
     }
 
     private void info(CommandSender sender) {
@@ -50,7 +51,7 @@ public class BorderControlCommand implements TabExecutor {
         if (plugin == null)
             return;
 
-        plugin.loadConfig();
-        sender.sendMessage(SRWorldBorder.getInstance().getBorderInfo());
+        plugin.loadBorderConfig();
+        sender.sendMessage(SRWorldBorder.getInstance().getBorderConfig().getBorderInfo());
     }
 }
